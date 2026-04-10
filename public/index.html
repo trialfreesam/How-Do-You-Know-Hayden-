@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Do You Know Hayden?</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>🎭 How Do You Know Hayden?</h1>
+    <nav id="nav" style="display: none;">
+      <button onclick="showSection('forum')">Forum</button>
+      <button onclick="showSection('characters')">Characters</button>
+      <span id="currentCharacter"></span>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Teacher Create Room Section -->
+    <section id="teacher-create" class="active-section">
+      <h2>Create a Classroom</h2>
+      <form id="create-room-form">
+        <input type="text" id="teacher-name" placeholder="Your Name" required>
+        <input type="text" id="room-name" placeholder="Class/Room Name" required>
+        <button type="submit">Create Room</button>
+      </form>
+      <div id="room-created" style="display: none;">
+        <h3>Room Created!</h3>
+        <p>Share this code with your students: <strong id="teacher-code"></strong></p>
+        <button onclick="location.reload()">Create Another Room</button>
+      </div>
+    </section>
+
+    <!-- Student Join Room Section -->
+    <section id="student-join" style="display: none;">
+      <h2>Join a Classroom</h2>
+      <form id="join-room-form">
+        <input type="text" id="teacher-code-input" placeholder="Enter Teacher's Code" required maxlength="6">
+        <button type="submit">Join Room</button>
+      </form>
+      <button onclick="showSection('teacher-create')" class="back-btn">← Back to Teacher Setup</button>
+    </section>
+
+    <!-- Character Creation Section -->
+    <section id="character-creation" style="display: none;">
+      <h2>Create Your Character</h2>
+      <p>Create a high school student character who is part of the drama class.</p>
+      <form id="character-form">
+        <input type="text" id="char-name" placeholder="Character Name" required>
+        <textarea id="char-personality" placeholder="Personality Traits (e.g., shy, ambitious, funny)" required rows="3"></textarea>
+        <textarea id="char-backstory" placeholder="Backstory (family, interests, relationship with drama class)" required rows="5"></textarea>
+        <input type="url" id="char-photo" placeholder="Photo URL (optional)">
+        <button type="submit">Create Character</button>
+      </form>
+    </section>
+
+    <!-- Forum Section -->
+    <section id="forum" style="display: none;">
+      <h2>Discussion Board: "How Do You Know Hayden?"</h2>
+      <p class="forum-description">Share your stories, memories, photos, videos, or art featuring Hayden. Nobody knows what award Hayden received yet... but maybe through our stories we'll discover it together.</p>
+      
+      <div class="new-post-form">
+        <h3>Share Your Story</h3>
+        <form id="post-form">
+          <textarea id="post-content" placeholder="How do you know Hayden? Share your story..." required rows="4"></textarea>
+          <select id="media-type">
+            <option value="text">Text Only</option>
+            <option value="image">Image/Photo</option>
+            <option value="video">Video</option>
+            <option value="audio">Audio</option>
+            <option value="art">Art/Drawing</option>
+          </select>
+          <input type="url" id="media-url" placeholder="Media URL (optional)">
+          <button type="submit">Post</button>
+        </form>
+      </div>
+
+      <div id="posts-container"></div>
+    </section>
+
+    <!-- Characters Section -->
+    <section id="characters" style="display: none;">
+      <h2>Drama Class Characters</h2>
+      <div id="characters-grid"></div>
+    </section>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
